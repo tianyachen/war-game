@@ -1,0 +1,20 @@
+button {
+    display: block;
+    background-color: #1abc9c;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: #eeeeee;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#game_buttons{
+    position: absolute;
+    top: 20%;
+    left: 40%;
+}
