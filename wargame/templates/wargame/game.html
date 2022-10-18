@@ -1,0 +1,35 @@
+{% extends "wargame/base.html" %}
+
+{% block title %}
+    War Game Page
+{% endblock %}
+
+{% block content %}
+    <script>
+        // Call playGame() as soon as page is finished loading to display game play
+        window.onload = playGame;
+    </script>
+
+    <div id="game-board">
+        {% load static %}
+        <div>
+            <img src="{% static 'images/spiderman_icon.png' %}" alt="Player1 Icon" id="player1-icon"> 
+            <img src="{% static 'images/card_back.png' %}" alt="Player1 stack" id="player1-stack">
+            <p id="player1-text">Player 1</p> 
+
+        </div>
+        
+        <div>
+            <img src="{% static 'images/wolverine_icon.png' %}" alt="Player2 Icon" id="player2-icon">
+            <img src="{% static 'images/card_back.png' %}" alt="Player2 stack" id="player2-stack">
+            <p id="player2-text">Player 2</p> 
+        </div>
+        
+
+    </div>
+
+{% endblock %}
+
+{% block nav-home %}
+    <a href="{% url 'home' %}">Return Home</a>
+{% endblock %}

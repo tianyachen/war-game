@@ -1,0 +1,20 @@
+{% extends "wargame/base.html" %}
+
+{% block title %}
+    Score Histroy
+{% endblock %}
+
+{% block content %}
+    <script>
+        // Call getScore() as soon as page is finished loading to display game play
+        window.onload = getScores;
+    </script>
+
+    <div id="score-board">
+    </div>
+    
+{% endblock %}
+
+{% block nav-home %}
+    <a href="{% url 'home' %}">Return Home</a>
+{% endblock %}

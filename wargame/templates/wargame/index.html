@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wat Game Home</title>
-    {% load static %}
-	<link href="{% static 'wargame/wargame.css' %}" rel="stylesheet" type="text/css">
-    <script src="{% static 'wargame/wargame.js' %}" type="text/javascript"></script>
-</head>
-<body>
+{% extends "wargame/base.html" %}
+
+{% block title %}
+    War Home Page
+{% endblock %}
+
+{% block content %}
     <div id="game_buttons">
-        <button onclick="play_game()">Play</button>
-        <button onclick="get_scores()">Score History</button>
-        <button onclick="test_game()">Test</button> 
+        <a href="{% url 'play_game' %}">Play</a>
+        <a href="{% url 'score_history' %}">Score History</a>
+        <a href="{% url 'test_game' %}">Test</a> 
     </div>
-   
-</body>
-</html>
+
+{% endblock %}
+
