@@ -20,4 +20,9 @@ from wargame import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('wargame/score-history', views.score_history, name='score_history'),
+    path('wargame/test-game', views.test_game, name='test_game'),
+    path('wargame/play-game', views.play_game, name='play_game'),
+    path('wargame/get-scores', views.get_scores, name='get_scores'),
+    path('wargame/add-scores', views.add_score, name='add_score'),
 ]
