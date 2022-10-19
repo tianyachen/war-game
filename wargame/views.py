@@ -23,11 +23,8 @@ def add_score(request):
 
     if not 'who_wins' in request.POST or not request.POST['who_wins']:
         return _my_json_error_response("You must identify who wins.", status=400)
-    
-    if not 'mode' in request.POST or not request.POST['mode']:
-        return _my_json_error_response("You must identify a mode.", status=400)
 
-    new_game = Game(who_wins = request.POST['who_wins'], creation_time = timezone.now(), mode=request.POST['mode'])
+    new_game = Game(who_wins = request.POST['who_wins'], creation_time = timezone.now())
     new_game.save()
     return end_game(new_game)
 
@@ -36,7 +33,6 @@ def end_game(game):
         'id': game.id,
         'time': game.creation_time.isoformat(),
         'who_wins': game.who_wins,
-        'mode': game.mode
     }
     response_json = json.dumps(game_status)
     return HttpResponse(response_json, content_type='application/json')
@@ -49,7 +45,6 @@ def get_scores(request):
             'id': game.id, 
             'time': game.creation_time.isoformat(),
             'who_wins': game.who_wins,
-            'mode': game.mode
         }
         score_history.append(score_data)
     response_json = json.dumps(score_history)

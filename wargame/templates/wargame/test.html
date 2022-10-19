@@ -1,5 +1,12 @@
 {% extends "wargame/base.html" %}
 
+{% block javascript %} 
+    {% load static %}
+    <script src="{% static 'wargame/wargame_test.js' %}" type="text/javascript"></script>  
+    <script src="{% static 'wargame/utils.js' %}" type="text/javascript"></script> 
+
+{% endblock %}
+
 {% block title %}
     Test Page
 {% endblock %}

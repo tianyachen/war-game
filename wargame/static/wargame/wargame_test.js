@@ -3,18 +3,9 @@ var numbers = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "que
 var values = [14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 var whoWins = -1;
 
-async function playGame(){
+function playGame(){
     let deck = createDeck();
-
-    await sleep(1000);
-
-    $("#game-status").html("Shuffle deck!");
-    sleep(2000);
-
     shuffleDeck(deck);
-
-    $("#game-status").html("Deal cards!");
-    sleep(2000);
 
     stacks = deal(deck);
     player1Stack = stacks[0];
@@ -26,27 +17,14 @@ async function playGame(){
     while(player1Stack.length != 0 && player2Stack.length != 0 && round < 5000){
         card1 = player1Stack.pop();
         card2 = player2Stack.pop();
-        $("#game-status").html("Play card!");
-
-        $("#player1-faceup").attr("src","/static/images/card_back.png");
-        $("#player1-facedown").attr("src","/static/images/white_background.jpeg")
-        $("#player2-faceup").attr("src","/static/images/card_back.png");
-        $("#player2-facedown").attr("src","/static/images/white_background.jpeg")
-        await sleep(2000);
 
         let cardArray = shuffleCards([card1, card2]);
 
-        $("#player1-faceup").attr("src","/static/images/PNG-cards/" + getCardImgName(card1));
-        $("#player2-faceup").attr("src","/static/images/PNG-cards/" + getCardImgName(card2));
-
         if (card1.value > card2.value){
-            $("#game-status").html("Player one's card is large!");
             shuffleCardToPlayer(player1Stack, cardArray);
         } else if (card1.value < card2.value){
-            $("#game-status").html("Player two's card is large!");
             shuffleCardToPlayer(player2Stack, cardArray);
         } else { // war!
-            $("#game-status").html("Go to war!");
             let result = settleWar(player1Stack, player2Stack, mode);
             if (result == 1){
                 shuffleCardToPlayer(player1Stack, cardArray);
@@ -55,7 +33,6 @@ async function playGame(){
             }
         }
         round++;
-        await sleep(2000);
     }
 
     if (player1Stack.length == 0){
@@ -69,15 +46,12 @@ async function playGame(){
     addScore(mode);
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 function getCardImgName(card){
     return card.number + "_of_" + card.suit + ".png";
 }
 
-async function settleWar(player1Stack, player2Stack, mode){
+function settleWar(player1Stack, player2Stack, mode){
     if (player1Stack.length == 0){
         return 2;
     }
@@ -104,28 +78,14 @@ async function settleWar(player1Stack, player2Stack, mode){
     cardFaceUp1 = player1Stack.pop();
     cardFaceUp2 = player2Stack.pop(); 
 
-    await sleep(2000);
-    $("#game-status").html("Play card during war!");
-    $("#player1-faceup").attr("src","/static/images/card_back.png");
-    $("#player1-facedown").attr("src","/static/images/card_back.png")
-    $("#player2-faceup").attr("src","/static/images/card_back.png");
-    $("#player2-facedown").attr("src","/static/images/card_back.png")
-    await sleep(2000);
-
-    $("#player1-faceup").attr("src","/static/images/PNG-cards/" + getCardImgName(cardFaceUp1));
-    $("#player2-faceup").attr("src","/static/images/PNG-cards/" + getCardImgName(cardFaceUp2));
-
     let cardArray = shuffleCards([cardFaceDown1, cardFaceUp1, cardFaceDown2, cardFaceUp2]);
     if (cardFaceUp1.value > cardFaceUp2.value){
-        $("#game-status").html("Player one's card is large!");
         shuffleCardToPlayer(player1Stack, cardArray);
         return 1;
     } else if (cardFaceUp1.value < cardFaceUp2.value){
-        $("#game-status").html("Player two's card is large!");
         shuffleCardToPlayer(player2Stack, cardArray);
         return 2;
     } else { // war!
-        $("#game-status").html("Go to war!");
         let result = settleWar(player1Stack, player2Stack);
         if (result == 1){
             shuffleCardToPlayer(player1Stack, cardArray);
@@ -211,6 +171,7 @@ function deal(deck){
     return [player1Stack, player2Stack]
 }
 
+
 function addScore(mode){
     $.ajax({
         url: "/wargame/add-score",
@@ -222,6 +183,33 @@ function addScore(mode){
     });
 }
 
+function testGame(){
+    let text;
+    let numTests = prompt("Please enter number of test runs:", 100);
+    if (numTests == null || numTests < 0){
+        text = "User cancelled the prompt or entered invalid number.";
+    } else {
+        let player1Score = 0;
+        let player2Score = 0;
+        let tieScore = 0;
+        for (let i = 0; i < numTests; i++){
+            playGame();
+            if (whoWins==1){
+                player1Score++;
+            } else if (whoWins==2){
+                player2Score++;
+            } else {
+                tieScore++;
+            }
+        }
+        text = "Total number of runs: " + numTests + "<br>" + 
+               "Player 1 wins: " + player1Score + "<br>" + 
+               "Player 2 wins: " + player2Score + "<br>" + 
+               "num of ties: " + tieScore;
+    }
+    $("#test-result").html(text);
+    return 0;
+}
 
 function endGame(responseText){
     let response = responseText;
@@ -235,9 +223,6 @@ function endGame(responseText){
         }
     }
 }
-
-
-
 
 
 
