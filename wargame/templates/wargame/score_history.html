@@ -5,15 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <script>
-        // Call getScore() as soon as page is finished loading to display game play
-        window.onload = getScores;
-    </script>
 
     <div id="score-board">
         <div id="stats"></div>
         <div id="history"></div>
     </div>
+
+    <script>
+        // Call getScore() as soon as page is finished loading to display game play
+        window.onload = getScores;
+    </script>
     
 {% endblock %}
 

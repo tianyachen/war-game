@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <div id="test_result"></div>
+    <div id="test-result"></div>
+    <script>
+        // Call testGame() as soon as page is finished loading to display game play
+        window.onload = testGame;
+    </script>
 {% endblock %}
 
 {% block nav-home %}

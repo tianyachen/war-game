@@ -5,10 +5,6 @@
 {% endblock %}
 
 {% block content %}
-    <script>
-        // Call playGame() as soon as page is finished loading to display game play
-        window.onload = playGame("demo");
-    </script>
 
     <div id="game-board">
         {% load static %}
@@ -18,15 +14,17 @@
             <p id="player1-text">Player 1</p> 
 
         </div>
+
+        <div>
             <img src="{% static 'images/white_background.jpeg' %}" alt="Player1 facedown" id="player1-facedown"> 
             <img src="{% static 'images/white_background.jpeg' %}" alt="Player1 faceup" id="player1-faceup"> 
-        <div>
-        
         </div>
+
+        <div id="game-status">Game Starts!</div>
+
+        <div>
             <img src="{% static 'images/white_background.jpeg' %}" alt="Player2 facedown" id="player2-facedown"> 
             <img src="{% static 'images/white_background.jpeg' %}" alt="Player2 faceup" id="player2-faceup"> 
-        <div>
-
         </div>
         
         <div>
@@ -34,9 +32,12 @@
             <img src="{% static 'images/card_back.png' %}" alt="Player2 stack" id="player2-stack">
             <p id="player2-text">Player 2</p> 
         </div>
-        
-
     </div>
+
+    <script>
+        // Call playGame() 3 sec after page is finished loading to play game
+        window.onload = function(event) { playGame('demo') }
+    </script>
 
 {% endblock %}
 
