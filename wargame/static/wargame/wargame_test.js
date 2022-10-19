@@ -25,7 +25,7 @@ function playGame(){
         } else if (card1.value < card2.value){
             shuffleCardToPlayer(player2Stack, cardArray);
         } else { // war!
-            let result = settleWar(player1Stack, player2Stack, mode);
+            let result = settleWar(player1Stack, player2Stack);
             if (result == 1){
                 shuffleCardToPlayer(player1Stack, cardArray);
             } else {
@@ -43,7 +43,7 @@ function playGame(){
         whoWins = 0;
     }
 
-    addScore(mode);
+    addScore();
 }
 
 
@@ -51,7 +51,7 @@ function getCardImgName(card){
     return card.number + "_of_" + card.suit + ".png";
 }
 
-function settleWar(player1Stack, player2Stack, mode){
+function settleWar(player1Stack, player2Stack){
     if (player1Stack.length == 0){
         return 2;
     }
@@ -172,11 +172,11 @@ function deal(deck){
 }
 
 
-function addScore(mode){
+function addScore(){
     $.ajax({
         url: "/wargame/add-score",
         type: "POST",
-        data: "who_wins="+encodeURIComponent(whoWins)+ "&mode="+ encodeURIComponent(mode) +"&csrfmiddlewaretoken="+encodeURIComponent(getCSRFToken()),
+        data: "who_wins="+encodeURIComponent(whoWins)+"&csrfmiddlewaretoken="+encodeURIComponent(getCSRFToken()),
         dataType : "json",
         success: endGame,
         error: updateError
@@ -212,16 +212,7 @@ function testGame(){
 }
 
 function endGame(responseText){
-    let response = responseText;
-    if (response.mode == "demo"){
-        if (response.who_wins == 1){
-            alert("Player 1 wins!");
-        } else if (response.who_wins == 2){
-            alert("player 2 wins!");
-        } else {
-            alert("A tie!");
-        }
-    }
+    return;
 }
 
 

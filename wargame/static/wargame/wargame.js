@@ -47,7 +47,7 @@ async function playGame(){
             shuffleCardToPlayer(player2Stack, cardArray);
         } else { // war!
             $("#game-status").html("Go to war!");
-            let result = settleWar(player1Stack, player2Stack, mode);
+            let result = settleWar(player1Stack, player2Stack);
             if (result == 1){
                 shuffleCardToPlayer(player1Stack, cardArray);
             } else {
@@ -66,7 +66,7 @@ async function playGame(){
         whoWins = 0;
     }
 
-    addScore(mode);
+    addScore();
 }
 
 function sleep(ms) {
@@ -77,7 +77,7 @@ function getCardImgName(card){
     return card.number + "_of_" + card.suit + ".png";
 }
 
-async function settleWar(player1Stack, player2Stack, mode){
+async function settleWar(player1Stack, player2Stack){
     if (player1Stack.length == 0){
         return 2;
     }
@@ -211,11 +211,11 @@ function deal(deck){
     return [player1Stack, player2Stack]
 }
 
-function addScore(mode){
+function addScore(){
     $.ajax({
         url: "/wargame/add-score",
         type: "POST",
-        data: "who_wins="+encodeURIComponent(whoWins)+ "&mode="+ encodeURIComponent(mode) +"&csrfmiddlewaretoken="+encodeURIComponent(getCSRFToken()),
+        data: "who_wins="+encodeURIComponent(whoWins)+"&csrfmiddlewaretoken="+encodeURIComponent(getCSRFToken()),
         dataType : "json",
         success: endGame,
         error: updateError
@@ -225,15 +225,15 @@ function addScore(mode){
 
 function endGame(responseText){
     let response = responseText;
-    if (response.mode == "demo"){
-        if (response.who_wins == 1){
-            alert("Player 1 wins!");
-        } else if (response.who_wins == 2){
-            alert("player 2 wins!");
-        } else {
-            alert("A tie!");
-        }
+
+    if (response.who_wins == 1){
+        alert("Player 1 wins!");
+    } else if (response.who_wins == 2){
+        alert("player 2 wins!");
+    } else {
+        alert("A tie!");
     }
+
 }
 
 
