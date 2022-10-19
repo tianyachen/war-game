@@ -11,21 +11,21 @@ https://github.com/tianyachen/war-game
 
 ## Run in local evironment
 
-Download required python packages  
+1.Download required python packages  
 `pip install -r requirements.txt`  
 
-Clone the repo  
+2. Clone the repo  
 `git clone git@github.com:tianyachen/war-game.git`   
 or  
 `git clone https://github.com/tianyachen/war-game.git`  
 
-Create a virtual environment if preferred  
+3. Create a virtual environment if preferred  
 
-Create local database  
+4. Create local database  
 `python manage.py makemigrations wargame`  
 `python manage.py migrate`  
 
-Start django server  
+5. Start django server  
 `python manage.py runserver`  
 In the defualt settings, the django server is running on 127.0.0.1:8000/  
 
@@ -35,7 +35,7 @@ to the repo.
 
 ## Visit the cloud server
 The cloud server (apache) is running on AWS EC2.  
-The ip is  
+The ip is http://3.130.230.127
 
 
 ## Game Service GUI

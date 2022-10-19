@@ -5,6 +5,5 @@ migrations
 .DS_Store
 venv
 my_env
-config.ini
 **/__pycache__/
 webapps/__pycache__/
