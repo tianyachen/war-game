@@ -11,7 +11,7 @@ https://github.com/tianyachen/war-game
 
 ## Run in local evironment
 
-1.Download required python packages  
+1. Download required python packages  
 `pip install -r requirements.txt`  
 
 2. Clone the repo  
