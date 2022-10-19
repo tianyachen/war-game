@@ -1,8 +1,9 @@
-button {
+a {
     display: block;
     background-color: #1abc9c;
     border-radius: 10px;
     border: 4px double #cccccc;
+    text-decoration: none;
     color: #eeeeee;
     text-align: center;
     font-size: 28px;
@@ -17,4 +18,29 @@ button {
     position: absolute;
     top: 20%;
     left: 40%;
+}
+
+#player1-icon, #player2-icon{
+    width: 90px;
+    height: 90px;
+}
+
+#player1-stack, #player2-stack, #player1-faceup, #player1-facedown, #player2-faceup, #player2-facedown {
+    width: 80px;
+    height: 120px;
+}
+
+#game-board {
+    position: absolute;
+    top: 5%;
+    left: 40%;
+}
+
+#player1-text, #player2-text{
+    margin-left: 20px;
+}
+
+span {
+    display: inline-block; 
+    margin: 10px 10px 10px 10px;       
 }
