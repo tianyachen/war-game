@@ -12,15 +12,17 @@
 	</head>
 
 	<body>
+		{% csrf_token %}
+        <div class="nav-home">
+            {% block nav-home %}
+            {% endblock %}
+        </div>
 
 	    <div class="content">
 		    {% block content %}
 		    {% endblock %}
 		</div>
 
-        <div class="nav-home">
-            {% block nav-home %}
-            {% endblock %}
-        </div>
+
 	</body>
 </html>

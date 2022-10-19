@@ -7,7 +7,7 @@
 {% block content %}
     <script>
         // Call playGame() as soon as page is finished loading to display game play
-        window.onload = playGame;
+        window.onload = playGame("demo");
     </script>
 
     <div id="game-board">
@@ -16,6 +16,16 @@
             <img src="{% static 'images/spiderman_icon.png' %}" alt="Player1 Icon" id="player1-icon"> 
             <img src="{% static 'images/card_back.png' %}" alt="Player1 stack" id="player1-stack">
             <p id="player1-text">Player 1</p> 
+
+        </div>
+            <img src="{% static 'images/white_background.jpeg' %}" alt="Player1 facedown" id="player1-facedown"> 
+            <img src="{% static 'images/white_background.jpeg' %}" alt="Player1 faceup" id="player1-faceup"> 
+        <div>
+        
+        </div>
+            <img src="{% static 'images/white_background.jpeg' %}" alt="Player2 facedown" id="player2-facedown"> 
+            <img src="{% static 'images/white_background.jpeg' %}" alt="Player2 faceup" id="player2-faceup"> 
+        <div>
 
         </div>
         
